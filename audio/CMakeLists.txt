@@ -5,6 +5,10 @@ if (AEC_ANR_AGC_ENABLE)
 add_subdirectory(AEC_ANR_AGC)
 endif()
 
+if (ANR_ENABLE)
+add_subdirectory(ANR)
+endif()
+
 if (HDAEC)
 add_subdirectory(HDAEC)
 endif()
