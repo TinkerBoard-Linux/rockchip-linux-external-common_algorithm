@@ -1,5 +1,0 @@
-（0） 0 原始
-（1）lmf1 关延迟估计，延迟点数改为6
-（2）lmf2 （1）的基础上将NlpPlus的ErrRatioThd_L 改为3276，ErrRatioThd_H改为9830，ErrEchoThd_L后四项改为(1,1,5,10)，ErrEchoThd_H后四项改为(10,20,30,100)
-（3）lmf3 （2）的基础上将NlpPlus前4项使能打开
-（4）lmf4 （2）的基础上将Nlp前6项BandPassThd改为1

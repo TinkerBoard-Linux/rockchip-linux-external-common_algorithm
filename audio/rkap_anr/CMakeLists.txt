@@ -3,11 +3,12 @@ cmake_minimum_required(VERSION 3.2)
 project(ANR)
 
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/
-	DESTINATION "include/ANR"
+	DESTINATION "include/rkap_anr"
 	FILES_MATCHING PATTERN "*.h"
 )
 
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lib/libvoice_anr.a
-	${CMAKE_CURRENT_SOURCE_DIR}/lib/libvoice_common.a
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lib/librkap_anr.so
 	DESTINATION "lib"
 )
+
+add_subdirectory(test)

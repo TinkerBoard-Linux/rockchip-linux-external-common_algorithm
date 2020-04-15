@@ -1,0 +1,22 @@
+#1.cmake version
+cmake_minimum_required(VERSION 3.2)
+
+#2.project name
+project(AEC)
+
+# ----------------------------------------------------------------------------
+#  install headers
+# ----------------------------------------------------------------------------
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/
+	DESTINATION "include/rkap_aec"
+	FILES_MATCHING PATTERN "*.h"
+)
+
+# ----------------------------------------------------------------------------
+#  install libs
+# ----------------------------------------------------------------------------
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lib/librkap_aec.so
+	DESTINATION "lib"
+)
+
+add_subdirectory(test)

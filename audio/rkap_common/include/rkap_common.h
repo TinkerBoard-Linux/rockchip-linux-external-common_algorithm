@@ -27,42 +27,33 @@
  *  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef ANR_INTERFACE_H
-#define ANR_INTERFACE_H
+#ifndef __RKAP_COMMON_H__
+#define __RKAP_COMMON_H__
 
+typedef void *ap_handle_t;
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-/* Set preprocessor denoiser state */
-#define RK_DENOISE_PREPROCESS_SET 0
-/* Get preprocessor denoiser state */
-#define RK_DENOISE_PREPROCESS_GET 1
-/* Set proprocessor denoiser rate */
-#define RK_DENOISE_PREPROCESS_RATE 2
-/* Set proprocessor denoiser frame length */
-#define RK_DENOISE_PREPROCESS_FRMLEN 3
-
-typedef void *APHandleType;
-
-typedef struct ANRProcessState_
+typedef struct ap_state
 {
-    int anr_enabled;
+    int enabled;
 
     /* Basic info */
-    /* 8k~48k */
-    int sampling_rate;
-    /* frame time 10ms 16ms 20ms */
-    int frame_size; // only 10ms|16ms|20ms
-} ANRProcessState;
+    int sampling_rate;        /* 8k~48k */
+    int frame_size;           /* frame time only 10ms|16ms|20ms */
+} ap_state_t;
 
-extern APHandleType ANR_Init(ANRProcessState *st);
-extern void ANR_Destroy(APHandleType pstAnr);
-extern void ANR_Process(APHandleType pstAnr, short  *pfSigIn, short *pfSigOut);
-extern int ANR_Process_ctl(ANRProcessState *st, int request, void *ptr);
+enum
+{
+    /* ANR Requests */
+    AP_ANR_REQ_SET = 0x0,
+    AP_ANR_REQ_GET,
+    AP_ANR_REQ_RATE,
+    AP_ANR_REQ_FRMLEN,
+    AP_ANR_REQ_BAND_NUM,
+    AP_ANR_REQ_NOISE_FACTOR,
+    AP_ANR_REQ_SWIN_NUM,
+    AP_ANR_REQ_G_MIN,
+    /* AEC Requests */
+    AP_AEC_REQ_BASE,
+};
 
-#ifdef __cplusplus
-}
-#endif
-#endif
+#endif /* __RKAP_COMMON_H__ */
