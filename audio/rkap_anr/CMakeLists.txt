@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.2)
 project(ANR)
 
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/
-	DESTINATION "include/rkap_anr"
+	DESTINATION "include"
 	FILES_MATCHING PATTERN "*.h"
 )
 
