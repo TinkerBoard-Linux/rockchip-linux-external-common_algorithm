@@ -15,7 +15,7 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/
 # ----------------------------------------------------------------------------
 #  install libs
 # ----------------------------------------------------------------------------
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lib/librkap_aec.so
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lib/libRKAP_AEC.so
 	DESTINATION "lib"
 )
 

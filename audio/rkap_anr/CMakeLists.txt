@@ -7,7 +7,7 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/
 	FILES_MATCHING PATTERN "*.h"
 )
 
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lib/librkap_anr.so
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lib/libRKAP_ANR.so
 	DESTINATION "lib"
 )
 

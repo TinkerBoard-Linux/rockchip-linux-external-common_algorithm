@@ -31,7 +31,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-#include "rkap_anr.h"
+#include "AP_ANR.h"
 
 int main(int argc, char **argv)
 {
@@ -43,7 +43,7 @@ int main(int argc, char **argv)
     int swFrameLen = swFs / 50;
     int dataLen = 0;
     struct ANR_MAIN_STRUCT *pstAnr = NULL;
-    ap_anr_state_t state;
+    RKAP_ANR_State state;
 
     if (argc != 3)
     {
@@ -67,14 +67,14 @@ int main(int argc, char **argv)
     swBufferOut = (short *)malloc(sizeof(short) * swFrameLen);
 
     /* set parameter */
-    state.anr_basic_info.enabled = 1;
-    state.anr_basic_info.sampling_rate = swFs;
-    state.anr_basic_info.frame_size = swFrameLen;
-    state.Gmin = -30;
-    state.post_add_gain = 0;
-    state.factor = 0.98f;
+    state.pfAnrBasicInfo.isEnabled = 1;
+    state.pfAnrBasicInfo.swSampleRate = swFs;
+    state.pfAnrBasicInfo.swFrameLen = swFrameLen;
+    state.fGmin = -30;
+    state.fPostAddGain = 0;
+    state.fNoiseFactor = 0.98f;
 
-    pstAnr = ap_anr_init(&state);
+    pstAnr = ANR_Init(&state);
     if (pstAnr == NULL)
     {
         fprintf(stderr, "ANR Init failed\n");
@@ -84,12 +84,12 @@ int main(int argc, char **argv)
     do
     {
         dataLen = fread(swBufferIn, sizeof(short), swFrameLen, fp_in);
-        ap_anr_process(pstAnr, swBufferIn, swBufferOut);
+        ANR_Process(pstAnr, swBufferIn, swBufferOut);
         fwrite(swBufferOut, sizeof(short), swFrameLen, fp_out);
     }
     while (!feof(fp_in));
 
-    ap_anr_destroy(pstAnr);
+    ANR_Destroy(pstAnr);
     free(swBufferIn);
     free(swBufferOut);
 

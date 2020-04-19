@@ -27,33 +27,32 @@
  *  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __RKAP_COMMON_H__
-#define __RKAP_COMMON_H__
+#ifndef __AP_ANR_H__
+#define __AP_ANR_H__
 
-typedef void *ap_handle_t;
+#include "AP_Common.h"
 
-typedef struct ap_state
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+typedef struct RKAP_ANR_State_S
 {
-    int enabled;
+    RKAP_State pfAnrBasicInfo;
 
-    /* Basic info */
-    int sampling_rate;        /* 8k~48k */
-    int frame_size;           /* frame time only 10ms|16ms|20ms */
-} ap_state_t;
+    float fPostAddGain;    /* post-gain */
+    float fGmin;             /* spectral gain floor,unit:(dB),default:-30dB */
+    float fNoiseFactor;           /* noise suppression factor,default:0.98 */
+} RKAP_ANR_State;
 
-enum
-{
-    /* ANR Requests */
-    AP_ANR_REQ_SET = 0x0,
-    AP_ANR_REQ_GET,
-    AP_ANR_REQ_RATE,
-    AP_ANR_REQ_FRMLEN,
-    AP_ANR_REQ_BAND_NUM,
-    AP_ANR_REQ_NOISE_FACTOR,
-    AP_ANR_REQ_SWIN_NUM,
-    AP_ANR_REQ_G_MIN,
-    /* AEC Requests */
-    AP_AEC_REQ_BASE,
-};
 
-#endif /* __RKAP_COMMON_H__ */
+extern RKAP_Handle ANR_Init(RKAP_ANR_State *st);
+extern void ANR_Destroy(RKAP_Handle handle);
+extern int ANR_Process(RKAP_Handle handle, short *pfSigIn, short *pfSigOut);
+extern int ANR_Control(RKAP_Handle handle, int request, void *arg);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* __AP_ANR_H__ */

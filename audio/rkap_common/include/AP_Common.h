@@ -27,22 +27,33 @@
  *  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __RKAP_AEC_H__
-#define __RKAP_AEC_H__
+#ifndef __AP_COMMON_H__
+#define __AP_COMMON_H__
 
-#include "rkap_common.h"
+typedef void *RKAP_Handle;
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+typedef struct RKAP_State_S
+{
+    int isEnabled;
 
-extern ap_handle_t ap_aec_init(ap_state_t *st);
-extern void ap_aec_destroy(ap_handle_t handle);
-extern int ap_aec_process(ap_handle_t handle, short *buf_in,
-                          short *buf_ref, short *buf_out);
+    /* Basic info */
+    int swSampleRate;        /* 8k~48k */
+    int swFrameLen;           /* frame time only 10ms|16ms|20ms */
+} RKAP_State;
 
-#ifdef __cplusplus
-}
-#endif
+enum
+{
+    /* ANR Requests */
+    AP_ANR_REQ_SET = 0x0,
+    AP_ANR_REQ_GET,
+    AP_ANR_REQ_RATE,
+    AP_ANR_REQ_FRMLEN,
+    AP_ANR_REQ_BAND_NUM,
+    AP_ANR_REQ_NOISE_FACTOR,
+    AP_ANR_REQ_SWIN_NUM,
+    AP_ANR_REQ_G_MIN,
+    /* AEC Requests */
+    AP_AEC_REQ_BASE,
+};
 
-#endif /* __RKAP_AEC_H__ */
+#endif /* __AP_COMMON_H__ */

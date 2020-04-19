@@ -30,12 +30,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "rkap_aec.h"
+#include "AP_AEC.h"
 
 int main(int argc, char **argv)
 {
-    ap_handle_t *ap_aec;
-    ap_state_t state;
+    RKAP_Handle *ap_aec;
+    RKAP_State state;
     FILE *fp_near = NULL, *fp_far = NULL, *fp_out = NULL;
     short *swBufferIn, *swBufferRef, *swBufferOut;
     int swFs = 8000;
@@ -70,11 +70,11 @@ int main(int argc, char **argv)
     swBufferRef = (short *)malloc(sizeof(short) * swFrameLen);
     swBufferOut = (short *)malloc(sizeof(short) * swFrameLen);
 
-    state.enabled = 1;
-    state.sampling_rate = swFs;
-    state.frame_size = swFrameLen;
+    state.isEnabled = 1;
+    state.swSampleRate = swFs;
+    state.swFrameLen = swFrameLen;
 
-    ap_aec = ap_aec_init(&state);
+    ap_aec = AEC_Init(&state);
     if (ap_aec == NULL)
     {
         fprintf(stderr, "ap_aec_Init failed\n");
@@ -85,11 +85,11 @@ int main(int argc, char **argv)
     {
         dataLen = fread(swBufferIn, sizeof(short), swFrameLen, fp_near);
         dataLen = fread(swBufferRef, sizeof(short), swFrameLen, fp_far);
-        ap_aec_process(ap_aec, swBufferIn, swBufferRef, swBufferOut);
+        AEC_Process(ap_aec, swBufferIn, swBufferRef, swBufferOut);
         fwrite(swBufferOut, sizeof(short), swFrameLen, fp_out);
     }
 
-    ap_aec_destroy(ap_aec);
+    AEC_Destroy(ap_aec);
     free(swBufferRef);
     free(swBufferIn);
     free(swBufferOut);

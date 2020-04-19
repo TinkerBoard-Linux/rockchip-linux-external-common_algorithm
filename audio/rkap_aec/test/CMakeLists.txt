@@ -16,8 +16,8 @@ add_executable(${PROJECT_NAME}
 
 # add link library
 target_link_libraries(${PROJECT_NAME}
-	rkap_common
-	rkap_aec
+	RKAP_Common
+	RKAP_AEC
 	m)
 
 install(TARGETS ${PROJECT_NAME}

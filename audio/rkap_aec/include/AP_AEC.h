@@ -27,32 +27,22 @@
  *  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __AP_ANR_H__
-#define __AP_ANR_H__
+#ifndef __AP_AEC_H__
+#define __AP_AEC_H__
 
-#include "rkap_common.h"
+#include "AP_Common.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef struct ap_anr_state
-{
-    ap_state_t anr_basic_info;
-
-    float post_add_gain;    /* post-gain */
-    float Gmin;             /* spectral gain floor,unit:(dB),default:-30dB */
-    float factor;           /* noise suppression factor,default:0.98 */
-} ap_anr_state_t;
-
-
-extern ap_handle_t ap_anr_init(ap_anr_state_t *st);
-extern void ap_anr_destroy(ap_handle_t handle);
-extern int ap_anr_process(ap_handle_t handle, short *buf_in, short *buf_out);
-extern int ap_anr_control(ap_handle_t handle, int request, void *arg);
+extern RKAP_Handle AEC_Init(RKAP_State *st);
+extern void AEC_Destroy(RKAP_Handle handle);
+extern int AEC_Process(RKAP_Handle handle, short *pfSigIn,
+                       short *pfSigRef, short *pfSigOut);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __AP_ANR_H__ */
+#endif /* __AP_AEC_H__ */
