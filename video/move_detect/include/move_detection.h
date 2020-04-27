@@ -20,7 +20,15 @@ typedef struct {
 
 struct md_ctx;
 
+typedef struct {
+	int still_threshold0;
+	int still_threshold1;
+	int pix_threshold;
+	int reserved[32];
+} MD_PARAMS;
+
 struct md_ctx *move_detection_init(int width, int height, int width_ds, int height_ds, int is_single_ref);
+int move_detection_set_params(struct md_ctx *ctx, MD_PARAMS param);
 void move_detection_deinit(struct md_ctx *ctx);
 void move_detection(struct md_ctx *ctx, void *downscale_frame_y, ROI_INFO * p_roi_in, INFO_LIST *info_list);
 
