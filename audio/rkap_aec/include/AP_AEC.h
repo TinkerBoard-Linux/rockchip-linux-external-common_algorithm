@@ -36,7 +36,15 @@
 extern "C" {
 #endif
 
-extern RKAP_Handle AEC_Init(RKAP_State *st);
+typedef struct RKAP_AEC_State_S
+{
+    /* Basic info */
+    int swSampleRate;        /* 8k~48k */
+    int swFrameLen;           /* frame time only 10ms|16ms|20ms */
+    const char *pathPara;
+} RKAP_AEC_State;
+
+extern RKAP_Handle AEC_Init(RKAP_AEC_State *st);
 extern void AEC_Destroy(RKAP_Handle handle);
 extern int AEC_Process(RKAP_Handle handle, short *pfSigIn,
                        short *pfSigRef, short *pfSigOut);

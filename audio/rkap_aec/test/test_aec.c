@@ -35,16 +35,17 @@
 int main(int argc, char **argv)
 {
     RKAP_Handle *ap_aec;
-    RKAP_State state;
+    RKAP_AEC_State state;
     FILE *fp_near = NULL, *fp_far = NULL, *fp_out = NULL;
+    void *vParaData;
     short *swBufferIn, *swBufferRef, *swBufferOut;
     int swFs = 8000;
     int swFrameLen = swFs / 50;
     int dataLen = 0;
 
-    if (argc != 4)
+    if (argc != 5)
     {
-        fprintf(stderr, "%s is not 4\n", argv[0]);
+        fprintf(stderr, "%s is not 5\n", argv[0]);
         exit(1);
     }
     fp_near = fopen(argv[1], "rb");
@@ -66,13 +67,9 @@ int main(int argc, char **argv)
         exit(1);
     }
 
-    swBufferIn = (short *)malloc(sizeof(short) * swFrameLen);
-    swBufferRef = (short *)malloc(sizeof(short) * swFrameLen);
-    swBufferOut = (short *)malloc(sizeof(short) * swFrameLen);
-
-    state.isEnabled = 1;
     state.swSampleRate = swFs;
     state.swFrameLen = swFrameLen;
+    state.pathPara = argv[4];
 
     ap_aec = AEC_Init(&state);
     if (ap_aec == NULL)
@@ -80,6 +77,10 @@ int main(int argc, char **argv)
         fprintf(stderr, "ap_aec_Init failed\n");
         exit(1);
     }
+
+    swBufferIn = (short *)malloc(sizeof(short) * swFrameLen);
+    swBufferRef = (short *)malloc(sizeof(short) * swFrameLen);
+    swBufferOut = (short *)malloc(sizeof(short) * swFrameLen);
 
     while (!feof(fp_near) && !feof(fp_far))
     {

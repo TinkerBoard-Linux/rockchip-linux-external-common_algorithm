@@ -67,9 +67,9 @@ int main(int argc, char **argv)
     swBufferOut = (short *)malloc(sizeof(short) * swFrameLen);
 
     /* set parameter */
-    state.pfAnrBasicInfo.isEnabled = 1;
-    state.pfAnrBasicInfo.swSampleRate = swFs;
-    state.pfAnrBasicInfo.swFrameLen = swFrameLen;
+    // state.isEnabled = 1;
+    state.swSampleRate = swFs;
+    state.swFrameLen = swFrameLen;
     state.fGmin = -30;
     state.fPostAddGain = 0;
     state.fNoiseFactor = 0.98f;

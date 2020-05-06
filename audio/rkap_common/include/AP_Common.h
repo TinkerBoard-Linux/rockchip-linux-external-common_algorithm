@@ -32,15 +32,6 @@
 
 typedef void *RKAP_Handle;
 
-typedef struct RKAP_State_S
-{
-    int isEnabled;
-
-    /* Basic info */
-    int swSampleRate;        /* 8k~48k */
-    int swFrameLen;           /* frame time only 10ms|16ms|20ms */
-} RKAP_State;
-
 enum
 {
     /* ANR Requests */
