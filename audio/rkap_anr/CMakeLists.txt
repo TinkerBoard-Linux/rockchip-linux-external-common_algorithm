@@ -11,4 +11,6 @@ install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lib/libRKAP_ANR.so
 	DESTINATION "lib"
 )
 
-add_subdirectory(test)
+if(COMPILES_EXAMPLES)
+	add_subdirectory(test)
+endif()

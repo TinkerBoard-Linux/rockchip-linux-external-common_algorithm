@@ -27,4 +27,6 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/para
 	FILES_MATCHING PATTERN "*.bin"
 )
 
-add_subdirectory(test)
+if(COMPILES_EXAMPLES)
+	add_subdirectory(test)
+endif()
