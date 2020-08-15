@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <assert.h>
+#include <unistd.h>
 
 #include "../include/od_detection.h"
 
@@ -13,7 +14,7 @@ int main(int argc, char** argv) {
 	int frame_size = 0;
 	int width, height;
 	od_ctx od_ctx = NULL;
-	ROI_INFO roi_in[10] = {0};
+	OD_ROI_INFO roi_in[10] = {0};
     const char *yuv_input = NULL;
 
 	width = 1920;
@@ -60,6 +61,7 @@ int main(int argc, char** argv) {
 		}
 
 		printf("[OD RESULT]: frame-%03d occlusion:%d\n", frame_cnt++, roi_in[0].occlusion);
+		usleep(33333);
 	}
 
 	od_detection_deinit(od_ctx);
