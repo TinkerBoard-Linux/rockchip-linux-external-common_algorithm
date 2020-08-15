@@ -5,7 +5,7 @@
 #include <assert.h>
 #include <unistd.h>
 
-#include "../include/od_detection.h"
+#include "../include/occlusion_detection.h"
 
 int main(int argc, char** argv) {
 	unsigned char *datain = NULL;
@@ -34,9 +34,9 @@ int main(int argc, char** argv) {
 		return -1;
 	}
 
-	od_ctx = od_detection_init(width, height);
+	od_ctx = occlusion_detection_init(width, height);
 	if (!od_ctx) {
-		printf("ERROR: od_detection_init failed!\n");
+		printf("ERROR: occlusion_detection_init failed!\n");
 		return -1;
 	}
 
@@ -54,7 +54,7 @@ int main(int argc, char** argv) {
 		roi_in[0].down_right[1] = width; // x
 		roi_in[0].occlusion = 0;
 
-		ret = od_detection(od_ctx, datain, roi_in, 1);
+		ret = occlusion_detection(od_ctx, datain, roi_in, 1);
 		if (ret) {
 			printf("ERROR: od_detection error!\n");
 			break;
@@ -64,7 +64,7 @@ int main(int argc, char** argv) {
 		usleep(33333);
 	}
 
-	od_detection_deinit(od_ctx);
+	occlusion_detection_deinit(od_ctx);
 	fclose(infile);
 
 	return 0;
