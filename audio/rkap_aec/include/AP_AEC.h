@@ -44,10 +44,17 @@ typedef struct RKAP_AEC_State_S
     const char *pathPara;
 } RKAP_AEC_State;
 
-extern RKAP_Handle AEC_Init(RKAP_AEC_State *st);
+typedef enum AecTransType
+{
+    AEC_TX_TYPE = 0,
+    AEC_RX_TYPE
+} RKAP_AEC_TRANS_ENUM;
+
+extern RKAP_Handle AEC_Init(RKAP_AEC_State *st, RKAP_AEC_TRANS_ENUM transType);
 extern void AEC_Destroy(RKAP_Handle handle);
 extern int AEC_Process(RKAP_Handle handle, short *pfSigIn,
                        short *pfSigRef, short *pfSigOut);
+extern void AEC_DumpVersion(void);
 
 #ifdef __cplusplus
 }

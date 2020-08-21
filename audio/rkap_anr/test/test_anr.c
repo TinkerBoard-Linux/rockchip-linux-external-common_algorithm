@@ -37,37 +37,53 @@ int main(int argc, char **argv)
 {
     FILE *fp_in = NULL, *fp_out = NULL;
     short *swBufferIn, *swBufferOut;
-
-    int swFs = 16000;
-    int swChannel = 1;
-    int swFrameLen = swFs / 50;
+    int swFs;
+    int swFrameLen;
     int dataLen = 0;
     struct ANR_MAIN_STRUCT *pstAnr = NULL;
     RKAP_ANR_State state;
 
-    if (argc != 3)
+#ifdef FOR_VS_DEBUG
+    /* For Debug  */
+    argc = 4;
+    argv[1] = (char *)"../../../test_file/TOP_3m_LDS_speech_foam_2.5mm_transonic_3.pcm";
+    argv[2] = (char *)"../../../test_file/TOP_3m_LDS_speech_foam_2.5mm_transonic_3_out.pcm";
+    argv[3] = (char *)"16000";
+#endif
+    if (argc != 4)
     {
-        fprintf(stderr, "%s is not 3\n", argv[0]);
+        ANR_DumpVersion();
+        fprintf(stderr, "Usage: ./test_anr <rec.pcm> <rate 8000 ~ 48000>\n");
+        fprintf(stderr, "For example:\n");
+        fprintf(stderr, "  ./test_anr rec.pcm out_anr.pcm 8000\n");
         exit(1);
     }
+
     fp_in = fopen(argv[1], "rb");
     if (fp_in == NULL)
     {
-        fprintf(stderr, "%s fp_in fopen failed\n", argv[0]);
+        fprintf(stderr, "%s fp_in fopen failed\n", argv[1]);
         exit(1);
     }
     fp_out = fopen(argv[2], "wb");
     if (fp_out == NULL)
     {
-        fprintf(stderr, "%s fp_out fopen failed\n", argv[0]);
+        fprintf(stderr, "%s fp_out fopen failed\n", argv[2]);
         exit(1);
     }
+
+    swFs = atoi(argv[3]);
+    if (swFs < 8000 || swFs > 48000)
+    {
+        fprintf(stderr, "Not supported sample rate: %d\n", swFs);
+        exit(1);
+    }
+    swFrameLen  = swFs / 50;
 
     swBufferIn = (short *)malloc(sizeof(short) * swFrameLen);
     swBufferOut = (short *)malloc(sizeof(short) * swFrameLen);
 
     /* set parameter */
-    // state.isEnabled = 1;
     state.swSampleRate = swFs;
     state.swFrameLen = swFrameLen;
     state.fGmin = -30;

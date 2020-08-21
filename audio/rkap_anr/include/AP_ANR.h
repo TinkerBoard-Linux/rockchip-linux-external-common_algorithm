@@ -51,6 +51,7 @@ extern RKAP_Handle ANR_Init(RKAP_ANR_State *st);
 extern void ANR_Destroy(RKAP_Handle handle);
 extern int ANR_Process(RKAP_Handle handle, short *pfSigIn, short *pfSigOut);
 extern int ANR_Control(RKAP_Handle handle, int request, void *arg);
+extern void ANR_DumpVersion(void);
 
 #ifdef __cplusplus
 }
