@@ -19,6 +19,7 @@ int occlusion_detection_deinit(od_ctx ctx);
 int occlusion_detection(od_ctx ctx, void *downscale_frame_y, OD_ROI_INFO *p_roi_in, int roi_cnt);
 int occlusion_refresh_bg(od_ctx ctx);
 int occlusion_set_sensitivity(od_ctx ctx, int value);
+int occlusion_detection_enable_switch(od_ctx ctx, int enable, int value);
 
 #ifdef __cplusplus
 } //extern "C"
