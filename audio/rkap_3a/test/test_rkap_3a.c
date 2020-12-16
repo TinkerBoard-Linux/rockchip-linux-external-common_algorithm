@@ -31,7 +31,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "AP_AEC.h"
+#include <time.h>
+
+#include "RKAP_3A.h"
 
 int main(int argc, char **argv)
 {
@@ -43,23 +45,13 @@ int main(int argc, char **argv)
     void *vParaData;
     short *swBufferIn, *swBufferRef, *swBufferOut;
     int dataLen = 0;
-    char *out_rx_file = NULL;
 
-#ifdef FOR_VS_DEBUG
-    /* For Debug  */
-    argc = 6;
-    argv[1] = (char *)"../../../test_file/txin_noise.pcm";
-    argv[2] = (char *)"../../../test_file/rxin.pcm";
-    argv[3] = (char *)"../../../test_file/out_1.pcm";
-    argv[4] = (char *)"../../../para/para_ser_8k.bin";
-    argv[5] = (char *)"8000";
-#endif
     if (argc != 6)
     {
-        AEC_DumpVersion();
-        fprintf(stderr, "Usage: ./test_aec <near.pcm> <far.pcm> <out.pcm> <para.bin> <rate 8000 or 16000>\n");
+        RKAP_3A_DumpVersion();
+        fprintf(stderr, "Usage: ./test_rkap_3a <near.pcm> <far.pcm> <out.pcm> <para.bin> <rate 8000 or 16000>\n");
         fprintf(stderr, "For example:\n");
-        fprintf(stderr, "  ./test_aec rec.pcm ref.pcm out_aec.pcm RKAP_AecPara.bin 8000\n");
+        fprintf(stderr, "  ./test_rkap_3a rec.pcm ref.pcm out_aec.pcm RKAP_3A_Para.bin 8000\n");
         exit(1);
     }
     fp_near = fopen(argv[1], "rb");
@@ -80,14 +72,6 @@ int main(int argc, char **argv)
         fprintf(stderr, "%s fp_out_tx fopen failed\n", argv[3]);
         exit(1);
     }
-    out_rx_file = (char *)calloc(1, strlen(argv[3]) + 4);
-    sprintf(out_rx_file, "%s_rx", argv[3]);
-    fp_out_rx = fopen(out_rx_file, "wb");
-    if (fp_out_rx == NULL)
-    {
-        fprintf(stderr, "%s fp_out_rx fopen failed\n", out_rx_file);
-        exit(1);
-    }
 
     state.pathPara = argv[4];
 
@@ -98,22 +82,21 @@ int main(int argc, char **argv)
         exit(1);
     }
     swFrameLen  = swFs / 50;
-
     state.swSampleRate = swFs;
     state.swFrameLen = swFrameLen;
 
     /* tx init */
-    ap_aec_tx = AEC_Init(&state, AEC_TX_TYPE);
+    ap_aec_tx = RKAP_3A_Init(&state, AEC_TX_TYPE);
     if (ap_aec_tx == NULL)
     {
-        fprintf(stderr, "ap_aec_tx_Init failed\n");
+        fprintf(stderr, "RKAP 3A TX Init Failed\n");
         exit(1);
     }
     /* rx init */
-    ap_aec_rx = AEC_Init(&state, AEC_RX_TYPE);
+    ap_aec_rx = RKAP_3A_Init(&state, AEC_RX_TYPE);
     if (ap_aec_rx == NULL)
     {
-        fprintf(stderr, "ap_aec_rx_Init failed\n");
+        fprintf(stderr, "RKAP 3A RX Init Failed\n");
         exit(1);
     }
 
@@ -125,14 +108,13 @@ int main(int argc, char **argv)
     {
         dataLen = fread(swBufferIn, sizeof(short), swFrameLen, fp_near);
         dataLen = fread(swBufferRef, sizeof(short), swFrameLen, fp_far);
-        AEC_Process(ap_aec_rx, swBufferIn, NULL, swBufferOut);
-        fwrite(swBufferOut, sizeof(short), swFrameLen, fp_out_rx);
-        AEC_Process(ap_aec_tx, swBufferIn, swBufferRef, swBufferOut);
+        RKAP_3A_Process(ap_aec_rx, swBufferIn, NULL, swBufferOut);
+        RKAP_3A_Process(ap_aec_tx, swBufferIn, swBufferRef, swBufferOut);
         fwrite(swBufferOut, sizeof(short), swFrameLen, fp_out_tx);
     }
 
-    AEC_Destroy(ap_aec_tx);
-    AEC_Destroy(ap_aec_rx);
+    RKAP_3A_Destroy(ap_aec_tx);
+    RKAP_3A_Destroy(ap_aec_rx);
     free(swBufferRef);
     free(swBufferIn);
     free(swBufferOut);
@@ -143,11 +125,8 @@ int main(int argc, char **argv)
         fclose(fp_near);
     if (fp_out_tx)
         fclose(fp_out_tx);
-    if (fp_out_rx)
-        fclose(fp_out_rx);
-    if (out_rx_file)
-        free(out_rx_file);
-    printf("done...\n");
+
+    printf("test_rkap_3a Done\n");
 
     return 0;
 }

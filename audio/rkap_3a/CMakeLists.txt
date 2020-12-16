@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.2)
 
 #2.project name
-project(AEC)
+project(RKAP_3A)
 
 # ----------------------------------------------------------------------------
 #  install headers
@@ -15,7 +15,7 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/
 # ----------------------------------------------------------------------------
 #  install libs
 # ----------------------------------------------------------------------------
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lib/libRKAP_AEC.so
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lib/libRKAP_3A.so
 	DESTINATION "lib"
 )
 
@@ -23,7 +23,7 @@ install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lib/libRKAP_AEC.so
 #  install data
 # ----------------------------------------------------------------------------
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/para
-	DESTINATION "share/rkap_aec"
+    DESTINATION "share/rkap_3a"
 	FILES_MATCHING PATTERN "*.bin"
 )
 

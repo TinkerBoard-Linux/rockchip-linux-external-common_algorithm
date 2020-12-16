@@ -27,37 +27,34 @@
  *  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __AP_AEC_H__
-#define __AP_AEC_H__
+#ifndef __RKAP_ANR_H__
+#define __RKAP_ANR_H__
 
-#include "AP_Common.h"
+#include "RKAP_Common.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef struct RKAP_AEC_State_S
+typedef struct RKAP_ANR_State_S
 {
     /* Basic info */
     int swSampleRate;        /* 8k~48k */
     int swFrameLen;           /* frame time only 10ms|16ms|20ms */
-    const char *pathPara;
-} RKAP_AEC_State;
 
-typedef enum AecTransType
-{
-    AEC_TX_TYPE = 0,
-    AEC_RX_TYPE
-} RKAP_AEC_TRANS_ENUM;
+    float fPostAddGain;    /* post-gain */
+    float fGmin;             /* spectral gain floor,unit:(dB),default:-30dB */
+    float fNoiseFactor;           /* noise suppression factor,default:0.98 */
+} RKAP_ANR_State;
 
-extern RKAP_Handle AEC_Init(RKAP_AEC_State *st, RKAP_AEC_TRANS_ENUM transType);
-extern void AEC_Destroy(RKAP_Handle handle);
-extern int AEC_Process(RKAP_Handle handle, short *pfSigIn,
-                       short *pfSigRef, short *pfSigOut);
-extern void AEC_DumpVersion(void);
+extern RKAP_Handle RKAP_ANR_Init(RKAP_ANR_State *st);
+extern void RKAP_ANR_Destroy(RKAP_Handle handle);
+extern int RKAP_ANR_Process(RKAP_Handle handle, short *pfSigIn, short *pfSigOut);
+extern int RKAP_ANR_Control(RKAP_Handle handle, int request, void *arg);
+extern void RKAP_ANR_DumpVersion(void);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __AP_AEC_H__ */
+#endif /* __RKAP_ANR_H__ */

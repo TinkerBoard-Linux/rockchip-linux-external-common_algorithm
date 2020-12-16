@@ -31,7 +31,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-#include "AP_ANR.h"
+#include "RKAP_ANR.h"
 
 int main(int argc, char **argv)
 {
@@ -43,19 +43,12 @@ int main(int argc, char **argv)
     struct ANR_MAIN_STRUCT *pstAnr = NULL;
     RKAP_ANR_State state;
 
-#ifdef FOR_VS_DEBUG
-    /* For Debug  */
-    argc = 4;
-    argv[1] = (char *)"../../../test_file/TOP_3m_LDS_speech_foam_2.5mm_transonic_3.pcm";
-    argv[2] = (char *)"../../../test_file/TOP_3m_LDS_speech_foam_2.5mm_transonic_3_out.pcm";
-    argv[3] = (char *)"16000";
-#endif
     if (argc != 4)
     {
-        ANR_DumpVersion();
-        fprintf(stderr, "Usage: ./test_anr <rec.pcm> <rate 8000 ~ 48000>\n");
+        RKAP_ANR_DumpVersion();
+        fprintf(stderr, "Usage: ./test_rkap_anr <rec.pcm> <rate 8000 ~ 48000>\n");
         fprintf(stderr, "For example:\n");
-        fprintf(stderr, "  ./test_anr rec.pcm out_anr.pcm 8000\n");
+        fprintf(stderr, "  ./test_rkap_anr rec.pcm out_anr.pcm 8000\n");
         exit(1);
     }
 
@@ -90,26 +83,26 @@ int main(int argc, char **argv)
     state.fPostAddGain = 0;
     state.fNoiseFactor = 0.98f;
 
-    pstAnr = ANR_Init(&state);
+    pstAnr = RKAP_ANR_Init(&state);
     if (pstAnr == NULL)
     {
-        fprintf(stderr, "ANR Init failed\n");
+        fprintf(stderr, "RKAP ANR Init Failed\n");
         exit(1);
     }
 
     do
     {
         dataLen = fread(swBufferIn, sizeof(short), swFrameLen, fp_in);
-        ANR_Process(pstAnr, swBufferIn, swBufferOut);
+        RKAP_ANR_Process(pstAnr, swBufferIn, swBufferOut);
         fwrite(swBufferOut, sizeof(short), swFrameLen, fp_out);
     }
     while (!feof(fp_in));
 
-    ANR_Destroy(pstAnr);
+    RKAP_ANR_Destroy(pstAnr);
     free(swBufferIn);
     free(swBufferOut);
 
-    printf("done...\n");
+    printf("test_rkap_anr Done\n");
 
     return 0;
 }

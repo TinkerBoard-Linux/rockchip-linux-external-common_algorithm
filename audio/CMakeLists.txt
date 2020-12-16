@@ -6,7 +6,7 @@ if (AEC_ANR_AGC_ENABLE OR ANR_ENABLE)
 endif()
 
 if (AEC_ANR_AGC_ENABLE)
-	add_subdirectory(rkap_aec)
+	add_subdirectory(rkap_3a)
 endif()
 
 if (ANR_ENABLE)

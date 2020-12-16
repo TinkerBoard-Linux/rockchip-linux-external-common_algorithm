@@ -27,8 +27,8 @@
  *  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __AP_COMMON_H__
-#define __AP_COMMON_H__
+#ifndef __RKAP_COMMON_H__
+#define __RKAP_COMMON_H__
 
 typedef void *RKAP_Handle;
 
@@ -47,4 +47,4 @@ enum
     AP_AEC_REQ_BASE,
 };
 
-#endif /* __AP_COMMON_H__ */
+#endif /* __RKAP_COMMON_H__ */

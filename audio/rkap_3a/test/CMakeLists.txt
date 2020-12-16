@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 
-project(test_aec)
+project(test_rkap_3a)
 
 include_directories(
 	${CMAKE_CURRENT_SOURCE_DIR}/../include
@@ -12,12 +12,12 @@ link_directories(
 
 # add executable file
 add_executable(${PROJECT_NAME}
-	${CMAKE_CURRENT_SOURCE_DIR}/test_aec.c)
+	${CMAKE_CURRENT_SOURCE_DIR}/test_rkap_3a.c)
 
 # add link library
 target_link_libraries(${PROJECT_NAME}
 	RKAP_Common
-	RKAP_AEC
+	RKAP_3A
 	m)
 
 install(TARGETS ${PROJECT_NAME}
