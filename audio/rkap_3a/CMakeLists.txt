@@ -15,13 +15,22 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/
 # ----------------------------------------------------------------------------
 #  install libs
 # ----------------------------------------------------------------------------
+if (USE_32BIT)
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lib/libRKAP_3A.so
 	DESTINATION "lib"
 )
+endif()
+
+if (USE_64BIT)
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lib64/libRKAP_3A.so
+	DESTINATION "lib"
+)
+endif()
 
 # ----------------------------------------------------------------------------
-#  install data
+#  install 32bit data
 # ----------------------------------------------------------------------------
+if (USE_32BIT)
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/para
     DESTINATION "share/rkap_3a"
 	FILES_MATCHING PATTERN "*.bin"
@@ -29,4 +38,19 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/para
 
 if(COMPILES_EXAMPLES)
 	add_subdirectory(test)
+endif()
+endif()
+
+# ----------------------------------------------------------------------------
+#  install 64bit data
+# ----------------------------------------------------------------------------
+if (USE_64BIT)
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/para64
+    DESTINATION "share/rkap_3a"
+	FILES_MATCHING PATTERN "*.bin"
+)
+
+if(COMPILES_EXAMPLES)
+	add_subdirectory(test64)
+endif()
 endif()
