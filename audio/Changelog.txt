@@ -1,5 +1,9 @@
 # The change logs for Rockchip Audio Processor
 
+## V1.1.1 (2021.02.05)
+- Fixed discontinuous near-end talk
+- Add support Double Talk Detection(DTD)
+
 ## V1.1.0 (2021.01.31)
 - Fixed mute when AEC RX be opened
 - Fixed the FS bug for EQ
