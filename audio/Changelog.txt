@@ -1,5 +1,11 @@
 # The change logs for Rockchip Audio Processor
 
+## V1.2.0 (2021.04.22)
+- Update new Para.bins and matching for new Para tool
+- Fixed some NLP and CNG bugs
+- Optimize DTD and Echo
+- Optimize ANR and Denoise
+
 ## V1.1.1 (2021.02.05)
 - Fixed discontinuous near-end talk
 - Add support Double Talk Detection(DTD)
