@@ -48,7 +48,6 @@ int main(int argc, char **argv)
 
     if (argc != 6)
     {
-        RKAP_3A_DumpVersion();
         fprintf(stderr, "Usage: ./test_rkap_3a <near.pcm> <far.pcm> <out.pcm> <para.bin> <rate 8000 or 16000>\n");
         fprintf(stderr, "For example:\n");
         fprintf(stderr, "  ./test_rkap_3a rec.pcm ref.pcm out_aec.pcm RKAP_3A_Para.bin 8000\n");

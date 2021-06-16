@@ -40,11 +40,16 @@ typedef struct RKAP_ANR_State_S
 {
     /* Basic info */
     int swSampleRate;        /* 8k~48k */
-    int swFrameLen;           /* frame time only 10ms|16ms|20ms */
+    int swFrameLen;          /* frame time only 10ms|16ms|20ms */
+    int enHpfSwitch;         /* HighPass Filter Enable */
+    int enLpfSwitch;         /* LowPass Filter Enable */
 
-    float fPostAddGain;    /* post-gain */
-    float fGmin;             /* spectral gain floor,unit:(dB),default:-30dB */
-    float fNoiseFactor;           /* noise suppression factor,default:0.98 */
+    float fPostAddGain;     /* post-gain */
+    float fGmin;            /* spectral gain floor,unit:(dB),default:-30dB */
+    float fNoiseFactor;     /* noise suppression factor,default:0.98 */
+    float fHpfFc;           /* High Pass Filter cut-off frequency */
+    float fLpfFc;           /* Low Pass Filter cut-off frequency */
+
 } RKAP_ANR_State;
 
 extern RKAP_Handle RKAP_ANR_Init(RKAP_ANR_State *st);

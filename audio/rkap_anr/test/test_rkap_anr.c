@@ -82,6 +82,12 @@ int main(int argc, char **argv)
     state.fGmin = -30;
     state.fPostAddGain = 0;
     state.fNoiseFactor = 0.98f;
+    state.enHpfSwitch = 0;
+    state.fHpfFc = 200.0f;
+
+    state.enLpfSwitch = 0;
+    state.fLpfFc = 10000.0f;
+
 
     pstAnr = RKAP_ANR_Init(&state);
     if (pstAnr == NULL)
