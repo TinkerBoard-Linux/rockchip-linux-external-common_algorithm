@@ -13,6 +13,10 @@ if (ANR_ENABLE)
 	add_subdirectory(rkap_anr)
 endif()
 
+if (RKAPPLUS_ENABLE)
+	add_subdirectory(rkskv)
+endif()
+
 if (HDAEC)
 	add_subdirectory(HDAEC)
 endif()
