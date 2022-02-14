@@ -16,3 +16,7 @@ endif()
 if (RKAPPLUS_ENABLE)
 	add_subdirectory(rkskv)
 endif()
+
+if (RKAPPLUS_AED_ENABLE)
+	add_subdirectory(rkaed)
+endif()

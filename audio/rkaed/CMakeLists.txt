@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.2)
 
 #2.project name
-project(RKSKV)
+project(RKAED)
 
 # ----------------------------------------------------------------------------
 #  install headers
@@ -13,30 +13,22 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/
 )
 
 # ----------------------------------------------------------------------------
-#  install resource
-# ----------------------------------------------------------------------------
-install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/conf/
-	DESTINATION "vqefiles"
-	FILES_MATCHING PATTERN "*.json"
-)
-
-# ----------------------------------------------------------------------------
 #  install libs
 # ----------------------------------------------------------------------------
 if (USE_32BIT)
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lib32/libaec_bf_process.so
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lib32/librkaudio_detect.so
 	DESTINATION "lib"
 )
 endif()
 
 if (USE_64BIT)
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lib64/libaec_bf_process.so
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lib64/librkaudio_detect.so
 	DESTINATION "lib"
 )
 endif()
 
 if (USE_UCLIBC)
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/uclibc/libaec_bf_process.so
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/uclibc/librkaudio_detect.so
 	DESTINATION "lib"
 )
 endif()
