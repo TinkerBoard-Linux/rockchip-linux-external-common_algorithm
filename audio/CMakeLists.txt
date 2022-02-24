@@ -16,11 +16,3 @@ endif()
 if (RKAPPLUS_ENABLE)
 	add_subdirectory(rkskv)
 endif()
-
-if (HDAEC)
-	add_subdirectory(HDAEC)
-endif()
-
-if (TWO_MIC_BEAMFORM_ENABLE)
-	add_subdirectory(Two_mic_beamform)
-endif()
