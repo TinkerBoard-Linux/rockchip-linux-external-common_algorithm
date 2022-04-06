@@ -1,7 +1,7 @@
 {
     "skv_configs": {
         "aec": {
-            "status" : "enable",
+            "status" : "disable",
             "drop_ref_channel" : 0,
             "delay_len" : 0,
             "look_ahead" : 0
@@ -20,7 +20,7 @@
             "beta_down": "float:0.002"
         },
         "gsc": {
-            "status" : "enable",
+            "status" : "disable",
             "method" : 0
         },
         "agc": {
@@ -55,7 +55,7 @@
             "super_est_factor" : "6,10,10,10,10,10,6,6"
         },
         "dereverb": {
-            "status" : "enable",
+            "status" : "disable",
             "rlsLg"  :4,
             "curveLg" : 30,
             "delay"  : "2",
@@ -71,7 +71,7 @@
             "fSpeechGain"  : "float:0.3"
         },
         "dtd": {
-            "status" : "enable",
+            "status" : "disable",
             "ksiThd_high" : "float:0.7",
             "ksiThd_low" : "float:0.5"
         }
