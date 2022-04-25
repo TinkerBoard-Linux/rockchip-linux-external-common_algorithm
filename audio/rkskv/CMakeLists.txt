@@ -37,6 +37,7 @@ endif()
 
 if (USE_UCLIBC)
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/uclibc/libaec_bf_process.so
+        ${CMAKE_CURRENT_SOURCE_DIR}/uclibc/libaec_bf_process.a
 	DESTINATION "lib"
 )
 endif()

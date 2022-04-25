@@ -29,6 +29,7 @@ endif()
 
 if (USE_UCLIBC)
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/uclibc/librkaudio_detect.so
+        ${CMAKE_CURRENT_SOURCE_DIR}/uclibc/librkaudio_detect.a
 	DESTINATION "lib"
 )
 endif()
