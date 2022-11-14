@@ -21,17 +21,28 @@ extern "C" {
 #endif
 #include <stdint.h>
 
+#define DEMUXER_VIDEO_YUV420SP_10BIT 0
+#define DEMUXER_VIDEO_YUV420SP 1
+
 typedef struct _RKDEMUXER_READ_PACKET_CALLBACK_S {
     void (*read_video_packet)(void *);
     void (*read_audio_packet)(void *);
 } RKDEMUXER_READ_PACKET_CALLBACK_S;
 
-typedef struct DemuxerParam{
-    void    *pPlayer;
+typedef struct StDemuxerInput{
+    void    *ptr;
+    int8_t   s8VideoEnableFlag;
+    int8_t   s8AudioEnableFlag;
+    RKDEMUXER_READ_PACKET_CALLBACK_S pstReadPacketCallback;
+} DemuxerInput;
+
+typedef struct StDemuxerParam{
     int32_t  s32TotalTime;
     int8_t  *pVideoCodec;
     int32_t  s32VideoWidth;
     int32_t  s32VideoHeigh;
+    int8_t   s8VideoFormat;
+    int32_t  s32VideoAvgFrameRate;
     int32_t  s32VideoTimeBaseNum;
     int32_t  s32VideoTimeBaseDen;
     int64_t  s64VideoFirstPTS;
@@ -42,21 +53,23 @@ typedef struct DemuxerParam{
     int64_t  s64AudioFirstPTS;
     int32_t  s32AudioTimeBaseNum;
     int32_t  s32AudioTimeBaseDen;
-    RKDEMUXER_READ_PACKET_CALLBACK_S pstReadPacketCallback;
 } DemuxerParam;
 
 typedef struct StDemuxerPacket{
-    void    *pPlayer;
+    void    *ptr;
+    int8_t   s8EofFlag;
     int8_t   s8PacketNum;
     int8_t  *s8PacketData;
     int32_t  s32PacketSize;
+    int32_t  s32Series;
     int64_t  s64Pts;
     int64_t  s64Duration;
     int64_t  s64Pos;
 } DemuxerPacket;
 
-int rkdemuxer_init(void **cfg, const char *input_name, DemuxerParam *pt);
+int rkdemuxer_init(void **cfg, DemuxerInput *pt);
 void rkdemuxer_deinit(void **cfg);
+int rkdemuxer_get_param(void *cfg, const char *input_name, DemuxerParam *pt);
 int rkdemuxer_read_packet_start(void *demuxer_cfg);
 int rkdemuxer_read_packet_stop(void *demuxer_cfg);
 
