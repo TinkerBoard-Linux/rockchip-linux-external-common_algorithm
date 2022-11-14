@@ -1,5 +1,5 @@
-#ifndef MP3_ENC_TYPES_H
-#define MP3_ENC_TYPES_H
+#ifndef TYPES_H
+#define TYPES_H
 
 #include <stdio.h>
 #include <time.h>
@@ -27,13 +27,25 @@
 #define SBLIMIT         32
 
 #define BUFFER_SIZE  2048//2048//1384   /* output buffer size in bytes 576 bytes */
-static struct
-{
-  unsigned int i;   /* file buffer index */
-  unsigned char *b; /* buffer pointer */
-} bs;
 
-typedef struct {
+#define FIFO_SIZE  128
+typedef struct
+{
+    int si_len; /* number of bytes in side info */
+    int fr_len; /* number of data bytes in frame */
+    unsigned char side[40]; /* side info max len = (288 bits / 8) + 1 which gets cleared 最初40*/
+} fifo_t;
+
+#define main_size 16384   //main_size = si->resv_drain
+
+typedef struct
+{
+    unsigned int i;   /* file buffer index */
+    unsigned char *b; /* buffer pointer */
+} bs_t;
+
+typedef struct
+{
     FILE *file;
     int  type;
     int  layr;
@@ -60,105 +72,124 @@ typedef struct {
     int cutoff;
 } mpeg_t;
 
-FILE *infile,*outfile;
-typedef struct {
-    char* infile;
-
-    char* outfile;
+typedef struct
+{
+    char *in_buf;
+    char *out_buf;
     mpeg_t mpeg;
 } config_t;
-extern config_t config;
 
-typedef struct {
+typedef struct
+{
     long          remainder;
     long          bytes_per_frame;
     long          lag;
     int           mean_bits;
     int           sideinfo_len;
-}mp3_info;
-extern mp3_info mp3_con_info;
+} mp3_info;
 
 #define HUFFBITS unsigned long int
 #define HTN     34
 #define MXOFF   250
 
-struct huffcodetab {
-  unsigned int xlen;    /*max. x-index+                         */
-  unsigned int ylen;    /*max. y-index+                         */
-  unsigned int linbits; /*number of linbits                     */
-  unsigned int linmax;  /*max number to be stored in linbits    */
-  HUFFBITS *table;      /*pointer to array[xlen][ylen]          */
-  unsigned char *hlen;  /*pointer to array[xlen][ylen]          */
+struct huffcodetab
+{
+    unsigned int xlen;    /*max. x-index+                         */
+    unsigned int ylen;    /*max. y-index+                         */
+    unsigned int linbits; /*number of linbits                     */
+    unsigned int linmax;  /*max number to be stored in linbits    */
+    HUFFBITS *table;      /*pointer to array[xlen][ylen]          */
+    unsigned char *hlen;  /*pointer to array[xlen][ylen]          */
 };
 
 extern struct huffcodetab ht[HTN];/* global memory block                */
-                                /* array of all huffcodtable headers    */
-                                /* 0..31 Huffman code table 0..31       */
-                                /* 32,33 count1-tables                  */
+/* array of all huffcodtable headers    */
+/* 0..31 Huffman code table 0..31       */
+/* 32,33 count1-tables                  */
 
 /* Side information */
-typedef struct {
-        unsigned part2_3_length;
-        unsigned big_values;
-        unsigned count1;
-        unsigned global_gain;
-        unsigned table_select[3];
-        unsigned region0_count;
-        unsigned region1_count;
-        unsigned count1table_select;
-        unsigned address1;
-        unsigned address2;
-        unsigned address3;
-        int quantizerStepSize;
+typedef struct
+{
+    unsigned part2_3_length;
+    unsigned big_values;
+    unsigned count1;
+    unsigned global_gain;
+    unsigned table_select[3];
+    unsigned region0_count;
+    unsigned region1_count;
+    unsigned count1table_select;
+    unsigned address1;
+    unsigned address2;
+    unsigned address3;
+    int quantizerStepSize;
+    int *scalefac_band_long;
+    int cutoff;
 } gr_info;
 
-typedef struct {
-  int main_data_begin;
-  struct
-  {
+typedef struct
+{
+    int main_data_begin;
     struct
     {
-      gr_info tt;
-    } ch[2];
-  } gr[2];
-  int resv_drain;
+        struct
+        {
+            gr_info tt;
+        } ch[2];
+    } gr[2];
+    int resv_drain;
 } L3_side_info_t;
+
+typedef struct
+{
+    mp3_info info;
+    config_t config;
+    unsigned char header[4];
+
+    fifo_t fifo[FIFO_SIZE];
+    unsigned char main_[main_size];  /* main data buffer (length always less than this)实测68*/
+    bs_t bs;
+    int l3_enc[2][2][samp_per_frame2];
+    long mdct_freq[2][2][samp_per_frame2];
+    L3_side_info_t side_info;
+    long l3_sb_sample[2][3][18][SBLIMIT];
+    int main_data_begin;
+    int wr;
+    int rd;
+    int by;
+    int bi;
+    int count;
+    int bits;
+    int off[2];
+    int *scalefac_band_long;
+    int frame_size;
+} mp3_enc;
 
 /* function prototypes */
 
-short in_buf[2][1152];
-unsigned char *out_ptr;
-
 /* bitstream.c */
-void close_bit_stream(void);
-void open_bit_stream();
+void close_bit_stream(mp3_enc *mp3);
+void open_bit_stream(mp3_enc *mp3);
 
-unsigned int L3_format_bitstream( int l3_enc[2][2][samp_per_frame2], L3_side_info_t  *l3_side,unsigned char ** ppOutBuf);
-void Mp3EncodeHeaderInit(void);
-unsigned int Mp3EncodeVariableInit(int samplerate,int channel,int  Bitrate);
+unsigned int L3_format_bitstream(mp3_enc *mp3, unsigned char **ppOutBuf);
+mp3_enc *Mp3EncodeVariableInit(int samplerate, int channel, int  Bitrate);
+void Mp3EncodeDeinit(mp3_enc *mp3);
 /* l3loop.c */
 
 /* layer3.c */
-long L3_compress(int len ,unsigned char ** ppOutBuf );
-
-/* wave.c */
-void wave_open(int raw, int mono_from_stereo);
-unsigned short *wave_get(void);
-void wave_close(void);
+long L3_compress(mp3_enc *mp3, int len, unsigned char **ppOutBuf);
 
 /* coder.c */
-void L3_window_filter_subband(unsigned long **buffer, long s[SBLIMIT],
-                 int k);
+void L3_window_filter_subband(mp3_enc *mp3, unsigned long **buffer, long s[SBLIMIT],
+                              int k);
 #if 1
-void L3_iteration_loop( L3_side_info_t *side_info,
-                      int             mean_bits) ;
- void L3_mdct_sub()  ;
+void L3_iteration_loop(mp3_enc *mp3) ;
+void L3_mdct_sub(mp3_enc *mp3);
 #else
 void L3_iteration_loop(long            mdct_freq_org[1][1][samp_per_frame2],
                        L3_side_info_t *side_info,
                        int             l3_enc[1][1][samp_per_frame2],
                        int             mean_bits);
-void L3_mdct_sub(long sb_sample[2][3][18][SBLIMIT],
+void L3_mdct_sub(mp3_enc *mp3, long sb_sample[2][3][18][SBLIMIT],
                  long mdct_freq[2][2][samp_per_frame2]);
 
 #endif

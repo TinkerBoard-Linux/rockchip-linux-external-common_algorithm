@@ -13,9 +13,6 @@
 
 #define    AUDIO_SERVER_DATA_SHARE_MAX 2
 
-#define    AUDIO_CREATE_PULL            (1 << 1)
-#define    AUDIO_CREATE_PUSH            (1 << 2)
-
 typedef void *audio_player_semaphore_handle;
 typedef void *audio_player_mutex_handle;
 typedef void *audio_player_thread_handle;
@@ -194,7 +191,6 @@ typedef enum
     CMD_RECORDER_STOP,
     CMD_PLAYER_PLAY,
     CMD_PLAYER_SEEK,
-    CMD_PLAYER_EXIT,
 } media_sdk_msg_type_t;
 
 /**
@@ -349,7 +345,6 @@ typedef struct player_cfg
     uint32_t preprocess_stack_size;
     uint32_t decoder_stack_size;
     uint32_t playback_stack_size;
-    uint32_t mode;
 
     player_listen_cb listen;
     int resample_rate;
@@ -540,9 +535,6 @@ int player_register_amrdec(void);
 int player_register_apedec(void);
 player_handle_t player_create(player_cfg_t *cfg);
 int player_play(player_handle_t self, play_cfg_t *cfg);
-int player_push(player_handle_t self, char *buf, uint32_t len);
-int player_pull(player_handle_t self, char *buf, uint32_t len);
-int player_audio_info(player_handle_t self, struct audio_config *config, int time_out);
 player_state_t player_get_state(player_handle_t self);
 int player_stop(player_handle_t self);
 int player_device_stop(player_handle_t self, int wait);
@@ -647,7 +639,6 @@ void file_writer_destroy_impl(record_writer_t *self);
         .destroy = file_writer_destroy_impl \
     }
 struct audio_player_queue *audio_queue_create(size_t item_count, size_t item_size);
-int audio_queue_clear(struct audio_player_queue *self);
 int audio_queue_send(struct audio_player_queue *self, const void *data);
 int audio_queue_send_font(struct audio_player_queue *self, const void *data);
 int audio_queue_receive(struct audio_player_queue *self, void *data);
@@ -728,10 +719,13 @@ typedef struct
     int lFilterSize;
     //BufferState sInputBuffer;
     //short Left_right[NUMTAPS*2];
-    int Left_right[51 * 2];
+    int Left_right[64 * 2];
     int Last_sample[180 * 2];
     int last_sample_num;
     int process_num;
+    short numtaps;
+    short lastSampleLeft;
+    short lastSampleRight;
 } SRCState;
 
 long resample_48to16_4ch_init(SRCState_4ch *pSRC, unsigned long ulInputRate,
