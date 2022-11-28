@@ -31,6 +31,7 @@ typedef struct _RKDEMUXER_READ_PACKET_CALLBACK_S {
 
 typedef struct StDemuxerInput{
     void    *ptr;
+    int8_t   s8ReadModeFlag;
     int8_t   s8VideoEnableFlag;
     int8_t   s8AudioEnableFlag;
     RKDEMUXER_READ_PACKET_CALLBACK_S pstReadPacketCallback;
@@ -58,7 +59,7 @@ typedef struct StDemuxerParam{
 typedef struct StDemuxerPacket{
     void    *ptr;
     int8_t   s8EofFlag;
-    int8_t   s8PacketNum;
+    int8_t   s8SpecialFlag;
     int8_t  *s8PacketData;
     int32_t  s32PacketSize;
     int32_t  s32Series;
@@ -67,11 +68,13 @@ typedef struct StDemuxerPacket{
     int64_t  s64Pos;
 } DemuxerPacket;
 
-int rkdemuxer_init(void **cfg, DemuxerInput *pt);
-void rkdemuxer_deinit(void **cfg);
-int rkdemuxer_get_param(void *cfg, const char *input_name, DemuxerParam *pt);
+int rkdemuxer_init(void **demuxer_cfg, DemuxerInput *ptr);
+void rkdemuxer_deinit(void **demuxer_cfg);
+int rkdemuxer_get_param(void *demuxer_cfg, const char *input_name, DemuxerParam *ptr);
 int rkdemuxer_read_packet_start(void *demuxer_cfg);
 int rkdemuxer_read_packet_stop(void *demuxer_cfg);
+int rkdemuxer_read_one_video_packet(void *demuxer_cfg, DemuxerPacket *output_packet);
+int rkdemuxer_read_one_audio_packet(void *demuxer_cfg, DemuxerPacket *output_packet);
 
 #ifdef __cplusplus
 }
