@@ -34,7 +34,6 @@ typedef struct StDemuxerInput{
     int8_t   s8ReadModeFlag;
     int8_t   s8VideoEnableFlag;
     int8_t   s8AudioEnableFlag;
-    RKDEMUXER_READ_PACKET_CALLBACK_S pstReadPacketCallback;
 } DemuxerInput;
 
 typedef struct StDemuxerParam{
@@ -54,6 +53,7 @@ typedef struct StDemuxerParam{
     int64_t  s64AudioFirstPTS;
     int32_t  s32AudioTimeBaseNum;
     int32_t  s32AudioTimeBaseDen;
+    RKDEMUXER_READ_PACKET_CALLBACK_S pstReadPacketCallback;
 } DemuxerParam;
 
 typedef struct StDemuxerPacket{
