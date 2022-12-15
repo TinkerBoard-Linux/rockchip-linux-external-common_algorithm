@@ -22,8 +22,7 @@ endif()
 
 if (SRC_LIBS)
 	foreach(lib_var ${SRC_LIBS})
-		install(FILES ${lib_var}
-			TYPE LIB DESTINATION ${CMAKE_INSTALL_LIBDIR})
+		install(FILES ${lib_var} DESTINATION "lib")
 	endforeach(lib_var)
 else()
 	message(WARNING  "Not install common algorithm misc libraries")
