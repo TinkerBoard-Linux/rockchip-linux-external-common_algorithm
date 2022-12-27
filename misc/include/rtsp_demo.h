@@ -1,4 +1,4 @@
-// Copyright 2020-2021 Rockchip Electronics Co., Ltd. All rights reserved.
+// Copyright 2020-2022 Rockchip Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -40,6 +40,8 @@ int rtsp_set_video(rtsp_session_handle session, int codec_id, const uint8_t *cod
 
 int rtsp_set_audio(rtsp_session_handle session, int codec_id, const uint8_t *codec_data,
                    int data_len);
+int rtsp_set_audio_sample_rate (rtsp_session_handle session,int sample_rate);
+int rtsp_set_audio_channels (rtsp_session_handle session,int channels);
 
 int rtsp_sever_tx_video(rtsp_demo_handle demo, rtsp_session_handle session, const uint8_t *frame,
                         int len, uint64_t ts);
