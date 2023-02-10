@@ -15,10 +15,12 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/
 # ----------------------------------------------------------------------------
 #  install resource
 # ----------------------------------------------------------------------------
+if (NOT USE_UCLIBC)
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/conf/
 	DESTINATION "vqefiles"
 	FILES_MATCHING PATTERN "*.json"
 )
+endif()
 
 # ----------------------------------------------------------------------------
 #  install libs
@@ -31,13 +33,6 @@ endif()
 
 if (USE_64BIT)
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lib64/libaec_bf_process.so
-	DESTINATION "lib"
-)
-endif()
-
-if (USE_UCLIBC)
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/uclibc/libaec_bf_process.so
-        ${CMAKE_CURRENT_SOURCE_DIR}/uclibc/libaec_bf_process.a
 	DESTINATION "lib"
 )
 endif()
