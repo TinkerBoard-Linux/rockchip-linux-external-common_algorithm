@@ -1,7 +1,7 @@
 {
     "skv_configs": {
         "aec": {
-            "status" : "disable",
+            "status" : "enable",
             "drop_ref_channel" : 0,
             "delay_len" : 0,
             "look_ahead" : 0
