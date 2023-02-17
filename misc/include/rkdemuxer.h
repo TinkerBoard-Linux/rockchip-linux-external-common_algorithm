@@ -75,6 +75,8 @@ int rkdemuxer_read_packet_start(void *demuxer_cfg);
 int rkdemuxer_read_packet_stop(void *demuxer_cfg);
 int rkdemuxer_read_one_video_packet(void *demuxer_cfg, DemuxerPacket *output_packet);
 int rkdemuxer_read_one_audio_packet(void *demuxer_cfg, DemuxerPacket *output_packet);
+int rkdemuxer_read_video_duration(void *demuxer_cfg, int64_t *duration);
+int rkdemuxer_read_audio_duration(void *demuxer_cfg, int64_t *duration);
 
 #ifdef __cplusplus
 }
