@@ -71,12 +71,14 @@ typedef struct StDemuxerPacket{
 int rkdemuxer_init(void **demuxer_cfg, DemuxerInput *ptr);
 void rkdemuxer_deinit(void **demuxer_cfg);
 int rkdemuxer_get_param(void *demuxer_cfg, const char *input_name, DemuxerParam *ptr);
-int rkdemuxer_read_packet_start(void *demuxer_cfg);
+int rkdemuxer_read_packet_start(void *demuxer_cfg, int64_t startPts);
 int rkdemuxer_read_packet_stop(void *demuxer_cfg);
 int rkdemuxer_read_one_video_packet(void *demuxer_cfg, DemuxerPacket *output_packet);
 int rkdemuxer_read_one_audio_packet(void *demuxer_cfg, DemuxerPacket *output_packet);
 int rkdemuxer_read_video_duration(void *demuxer_cfg, int64_t *duration);
 int rkdemuxer_read_audio_duration(void *demuxer_cfg, int64_t *duration);
+int rkdemuxer_seek_video_pts(void *demuxer_cfg, int64_t seekPts);
+int rkdemuxer_seet_audio_pts(void *demuxer_cfg, int64_t seekPts);
 
 #ifdef __cplusplus
 }
