@@ -32,10 +32,21 @@ if (USE_UCLIBC)
 	endif()
 
 	if(RKAPPLUS_ENABLE)
-		install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/uclibc/libaec_bf_process.so
+		if (RKAPPLUS_WAKEUP_ENABLE)
+			install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/uclibc/libaec_bf_process_wakeup.so
+				DESTINATION "lib"
+				RENAME libaec_bf_process.so
+			)
+			install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/uclibc/libaec_bf_process_wakeup.a
+				DESTINATION "lib"
+				RENAME libaec_bf_process.a
+			)
+		else()
+			install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/uclibc/libaec_bf_process.so
 				${CMAKE_CURRENT_SOURCE_DIR}/uclibc/libaec_bf_process.a
-			DESTINATION "lib"
-		)
+				DESTINATION "lib"
+			)
+		endif()
 	endif()
 
 	if (RKAPPLUS_AED_ENABLE)
@@ -56,10 +67,21 @@ if (USE_32BIT)
 	endif()
 
 	if(RKAPPLUS_ENABLE)
-		install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lib32/libaec_bf_process.so
+	    if (RKAPPLUS_WAKEUP_ENABLE)
+			install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lib32/libaec_bf_process_wakeup.so
+				DESTINATION "lib"
+				RENAME libaec_bf_process.so
+			)
+			install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lib32/libaec_bf_process_wakeup.a
+				DESTINATION "lib"
+				RENAME libaec_bf_process.a
+			)
+		else()
+			install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lib32/libaec_bf_process.so
 				${CMAKE_CURRENT_SOURCE_DIR}/lib32/libaec_bf_process.a
-			DESTINATION "lib"
-	)
+				DESTINATION "lib"
+			)
+		endif()
 	endif()
 
 	if (RKAPPLUS_AED_ENABLE)
@@ -80,10 +102,21 @@ if (USE_64BIT)
 	endif()
 
 	if(RKAPPLUS_ENABLE)
-		install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lib64/libaec_bf_process.so
+		if (RKAPPLUS_WAKEUP_ENABLE)
+			install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lib32/libaec_bf_process_wakeup.so
+				DESTINATION "lib"
+				RENAME libaec_bf_process.so
+			)
+			install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lib64/libaec_bf_process_wakeup.a
+				DESTINATION "lib"
+				RENAME libaec_bf_process.a
+			)
+		else()
+			install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lib64/libaec_bf_process.so
 				${CMAKE_CURRENT_SOURCE_DIR}/lib64/libaec_bf_process.a
-			DESTINATION "lib"
-	)
+				DESTINATION "lib"
+			)
+		endif()
 	endif()
 
 	if (RKAPPLUS_AED_ENABLE)
