@@ -245,12 +245,12 @@ inline static void* rkaudio_agc_param_init()
 	param->attack_time = 200.0;		/* 触发时间，即AGC增益上升所需要的时间 */
 	param->release_time = 200.0;	/* 施放时间，即AGC增益下降所需要的时间 */
 	//param->max_gain = 35.0;		/* 最大增益，同时也是线性段增益，单位：dB */
-	param->max_gain = 20;			/* 最大增益，同时也是线性段增益，单位：dB */
+	param->max_gain = 30;			/* 最大增益，同时也是线性段增益，单位：dB */
 	param->max_peak = -1.0;			/* 经AGC处理后，输出语音的最大能量，范围：单位：dB */
 	param->fRk0 = 2;				/* 扩张段斜率 */
 	param->fRth2 = -35;				/* 压缩段起始能量dB阈值，同时也是线性段结束阈值，增益逐渐降低，注意 fRth2 + max_gain < max_peak */
-	param->fRth1 = -40;				/* 扩张段结束能量dB阈值，同时也是线性段开始阈值，能量高于改区域以max_gain增益 */
-	param->fRth0 = -45;				/* 噪声门阈值 */
+	param->fRth1 = -80;				/* 扩张段结束能量dB阈值，同时也是线性段开始阈值，能量高于改区域以max_gain增益 */
+	param->fRth0 = -85;				/* 噪声门阈值 */
 
 	/* 无效参数 */
 	param->fs = 16000;                       /* 数据采样率 */
