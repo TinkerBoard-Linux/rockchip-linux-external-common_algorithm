@@ -143,70 +143,70 @@ typedef struct SKVANRParam_ {
 } SKVANRParam;
 
 typedef struct RKAGCParam_ {
-	/* ÐÂ°æAGC²ÎÊý */
-	float              attack_time;  /* ´¥·¢Ê±¼ä£¬¼´AGCÔöÒæÏÂ½µËùÐèÒªµÄÊ±¼ä */
-	float			   release_time; /* Ê©·ÅÊ±¼ä£¬¼´AGCÔöÒæÉÏÉýËùÐèÒªµÄÊ±¼ä */
-	float              max_gain; /* ×î´óÔöÒæ£¬Í¬Ê±Ò²ÊÇÏßÐÔ¶ÎÔöÒæ£¬µ¥Î»£ºdB */
-	float 			   max_peak; /* ¾­AGC´¦Àíºó£¬Êä³öÓïÒôµÄ×î´óÄÜÁ¿£¬·¶Î§£ºµ¥Î»£ºdB */
-	float              fRth0;    /* À©ÕÅ¶Î½áÊøÄÜÁ¿dBãÐÖµ£¬Í¬Ê±Ò²ÊÇÏßÐÔ¶Î¿ªÊ¼ãÐÖµ */
-	float              fRk0;     /* À©ÕÅ¶ÎÐ±ÂÊ */
-	float              fRth1;    /* Ñ¹Ëõ¶ÎÆðÊ¼ÄÜÁ¿dBãÐÖµ£¬Í¬Ê±Ò²ÊÇÏßÐÔ¶Î½áÊøãÐÖµ */
+	/* æ–°ç‰ˆAGCå‚æ•° */
+	float              attack_time;  /* è§¦å‘æ—¶é—´ï¼Œå³AGCå¢žç›Šä¸‹é™æ‰€éœ€è¦çš„æ—¶é—´ */
+	float			   release_time; /* æ–½æ”¾æ—¶é—´ï¼Œå³AGCå¢žç›Šä¸Šå‡æ‰€éœ€è¦çš„æ—¶é—´ */
+	float              max_gain; /* æœ€å¤§å¢žç›Šï¼ŒåŒæ—¶ä¹Ÿæ˜¯çº¿æ€§æ®µå¢žç›Šï¼Œå•ä½ï¼šdB */
+	float 			   max_peak; /* ç»AGCå¤„ç†åŽï¼Œè¾“å‡ºè¯­éŸ³çš„æœ€å¤§èƒ½é‡ï¼ŒèŒƒå›´ï¼šå•ä½ï¼šdB */
+	float              fRth0;    /* æ‰©å¼ æ®µç»“æŸèƒ½é‡dBé˜ˆå€¼ï¼ŒåŒæ—¶ä¹Ÿæ˜¯çº¿æ€§æ®µå¼€å§‹é˜ˆå€¼ */
+	float              fRk0;     /* æ‰©å¼ æ®µæ–œçŽ‡ */
+	float              fRth1;    /* åŽ‹ç¼©æ®µèµ·å§‹èƒ½é‡dBé˜ˆå€¼ï¼ŒåŒæ—¶ä¹Ÿæ˜¯çº¿æ€§æ®µç»“æŸé˜ˆå€¼ */
 
-	/* ÎÞÐ§²ÎÊý */
-	int            fs;                       /* Êý¾Ý²ÉÑùÂÊ */
-	int            frmlen;                   /* ´¦ÀíÖ¡³¤ */
-	float          attenuate_time; /* ÔëÉùË¥¼õÊ±¼ä£¬¼´ÔëÉù¶ÎÔöÒæË¥¼õµ½1ËùÐèµÄÊ±¼ä */
-	float          fRth2;                     /* Ñ¹Ëõ¶ÎÆðÊ¼ÄÜÁ¿dBãÐÖµ */
-	float          fRk1;                      /* À©ÕÅ¶ÎÐ±ÂÊ */
-	float          fRk2;                      /* À©ÕÅ¶ÎÐ±ÂÊ */
-	float          fLineGainDb;               /* ÏßÐÔ¶ÎÌáÉýdBÊý */
-	int            swSmL0;                    /* À©ÕÅ¶ÎÊ±ÓòÆ½»¬µãÊý */
-	int            swSmL1;                    /* ÏßÐÔ¶ÎÊ±ÓòÆ½»¬µãÊý */
-	int            swSmL2;                    /* Ñ¹Ëõ¶ÎÊ±ÓòÆ½»¬µãÊý */
+	/* æ— æ•ˆå‚æ•° */
+	int            fs;                       /* æ•°æ®é‡‡æ ·çŽ‡ */
+	int            frmlen;                   /* å¤„ç†å¸§é•¿ */
+	float          attenuate_time; /* å™ªå£°è¡°å‡æ—¶é—´ï¼Œå³å™ªå£°æ®µå¢žç›Šè¡°å‡åˆ°1æ‰€éœ€çš„æ—¶é—´ */
+	float          fRth2;                     /* åŽ‹ç¼©æ®µèµ·å§‹èƒ½é‡dBé˜ˆå€¼ */
+	float          fRk1;                      /* æ‰©å¼ æ®µæ–œçŽ‡ */
+	float          fRk2;                      /* æ‰©å¼ æ®µæ–œçŽ‡ */
+	float          fLineGainDb;               /* çº¿æ€§æ®µæå‡dBæ•° */
+	int            swSmL0;                    /* æ‰©å¼ æ®µæ—¶åŸŸå¹³æ»‘ç‚¹æ•° */
+	int            swSmL1;                    /* çº¿æ€§æ®µæ—¶åŸŸå¹³æ»‘ç‚¹æ•° */
+	int            swSmL2;                    /* åŽ‹ç¼©æ®µæ—¶åŸŸå¹³æ»‘ç‚¹æ•° */
 
 } RKAGCParam;
 
 typedef struct RKCNGParam_
 {
 	/*CNG Parameter*/
-	float              fGain;                     /* INT16 Q0 Ê©¼ÓÊæÊÊÔëÉù·ù¶È±ÈÀý */
-	float              fMpy;						/* INT16 Q0 °×ÔëËæ»úÊýÉú³É·ù¶È */
-	float              fSmoothAlpha;              /* ÊæÊÊÔëÉùÆ½»¬ÏµÊý */
-	float              fSpeechGain;               /* ¸ù¾ÝÓïÒôÄÜÁ¿¶îÍâÊ©¼ÓÊæÊÊÔëÉù±ÈÀýÔöÒæ */
+	float              fGain;                     /* INT16 Q0 æ–½åŠ èˆ’é€‚å™ªå£°å¹…åº¦æ¯”ä¾‹ */
+	float              fMpy;						/* INT16 Q0 ç™½å™ªéšæœºæ•°ç”Ÿæˆå¹…åº¦ */
+	float              fSmoothAlpha;              /* èˆ’é€‚å™ªå£°å¹³æ»‘ç³»æ•° */
+	float              fSpeechGain;               /* æ ¹æ®è¯­éŸ³èƒ½é‡é¢å¤–æ–½åŠ èˆ’é€‚å™ªå£°æ¯”ä¾‹å¢žç›Š */
 } RKCNGParam;
 
 typedef struct RKDTDParam_
 {
-	float ksiThd_high;			 /* µ¥Ë«½²ÅÐ¾öãÐÖµ */
-	float ksiThd_low;			 /* µ¥Ë«½²ÅÐ¾öãÐÖµ */
+	float ksiThd_high;			 /* å•åŒè®²åˆ¤å†³é˜ˆå€¼ */
+	float ksiThd_low;			 /* å•åŒè®²åˆ¤å†³é˜ˆå€¼ */
 
 }RKDTDParam;
 
 typedef struct RKaudioEqParam_ {
-    int shwParaLen;           // ÂË²¨Æ÷ÏµÊý¸öÊý
-    short pfCoeff[5][13];          // ÂË²¨Æ÷ÏµÊý
+    int shwParaLen;           // æ»¤æ³¢å™¨ç³»æ•°ä¸ªæ•°
+    short pfCoeff[5][13];          // æ»¤æ³¢å™¨ç³»æ•°
 } RKaudioEqParam;
 
 
 /* Set the Sub-Para which used to initialize the Dereverb*/
 inline static void * rkaudio_dereverb_param_init(){
 	RKAudioDereverbParam* param = (RKAudioDereverbParam*)malloc(sizeof(RKAudioDereverbParam));
-	param->rlsLg = 4; /* RLSÂË²¨Æ÷½×Êý */
-	param->curveLg = 10; /* ·Ö²¼ÇúÏß½×Êý */
-	param->delay = 2; /* RLSÂË²¨Æ÷ÑÓÊ± */
-	param->forgetting = 0.98; /* RLSÂË²¨Æ÷ÒÅÍüÒò×Ó */
-	param->T60 = 0.5;//1.5; /* »ìÏìÊ±¼ä¹À¼ÆÖµ£¨µ¥Î»£ºs£©£¬Ô½´ó£¬È¥»ìÏìÄÜÁ¦Ô½Ç¿£¬µ«ÊÇÔ½ÈÝÒ×¹ýÏû³ý */
-	param->coCoeff = 1.0; /* »¥Ïà¸ÉÐÔµ÷ÕûÏµÊý£¬·ÀÖ¹¹ýÏû³ý£¬Ô½´óÄÜÁ¦Ô½Ç¿£¬½¨ÒéÈ¡Öµ£º0.5µ½2Ö®¼ä */
+	param->rlsLg = 4; /* RLSæ»¤æ³¢å™¨é˜¶æ•° */
+	param->curveLg = 10; /* åˆ†å¸ƒæ›²çº¿é˜¶æ•° */
+	param->delay = 2; /* RLSæ»¤æ³¢å™¨å»¶æ—¶ */
+	param->forgetting = 0.98; /* RLSæ»¤æ³¢å™¨é—å¿˜å› å­ */
+	param->T60 = 0.5;//1.5; /* æ··å“æ—¶é—´ä¼°è®¡å€¼ï¼ˆå•ä½ï¼šsï¼‰ï¼Œè¶Šå¤§ï¼ŒåŽ»æ··å“èƒ½åŠ›è¶Šå¼ºï¼Œä½†æ˜¯è¶Šå®¹æ˜“è¿‡æ¶ˆé™¤ */
+	param->coCoeff = 1.0; /* äº’ç›¸å¹²æ€§è°ƒæ•´ç³»æ•°ï¼Œé˜²æ­¢è¿‡æ¶ˆé™¤ï¼Œè¶Šå¤§èƒ½åŠ›è¶Šå¼ºï¼Œå»ºè®®å–å€¼ï¼š0.5åˆ°2ä¹‹é—´ */
 	return (void*)param;
 }
 inline static void* rkaudio_aes_param_init() {
 	RKAudioAESParameter* param = (RKAudioAESParameter*)malloc(sizeof(RKAudioAESParameter));
-	//param->Beta_Up = 0.001f; /* ÉÏÉýËÙ¶È */
-	//param->Beta_Down = 0.005f; /* ÏÂ½µËÙ¶È */
-	param->Beta_Up = 0.005f; /* ÉÏÉýËÙ¶È */
-	param->Beta_Down = 0.001f; /* ÏÂ½µËÙ¶È */
-	//param->Beta_Up = 0.0005f; /* ÉÏÉýËÙ¶È */
-	//param->Beta_Down = 0.01f; /* ÏÂ½µËÙ¶È */
+	//param->Beta_Up = 0.001f; /* ä¸Šå‡é€Ÿåº¦ */
+	//param->Beta_Down = 0.005f; /* ä¸‹é™é€Ÿåº¦ */
+	param->Beta_Up = 0.005f; /* ä¸Šå‡é€Ÿåº¦ */
+	param->Beta_Down = 0.001f; /* ä¸‹é™é€Ÿåº¦ */
+	//param->Beta_Up = 0.0005f; /* ä¸Šå‡é€Ÿåº¦ */
+	//param->Beta_Down = 0.01f; /* ä¸‹é™é€Ÿåº¦ */
 	return (void*)param;
 }
 /* Set the Sub-Para which used to initialize the NLP*/
@@ -241,27 +241,27 @@ inline static void* rkaudio_agc_param_init()
 {
 	RKAGCParam* param = (RKAGCParam*)malloc(sizeof(RKAGCParam));
 
-	/* ÐÂ°æAGC²ÎÊý */
-	param->attack_time = 200.0;		/* ´¥·¢Ê±¼ä£¬¼´AGCÔöÒæÉÏÉýËùÐèÒªµÄÊ±¼ä */
-	param->release_time = 200.0;	/* Ê©·ÅÊ±¼ä£¬¼´AGCÔöÒæÏÂ½µËùÐèÒªµÄÊ±¼ä */
-	//param->max_gain = 35.0;		/* ×î´óÔöÒæ£¬Í¬Ê±Ò²ÊÇÏßÐÔ¶ÎÔöÒæ£¬µ¥Î»£ºdB */
-	param->max_gain = 30;			/* ×î´óÔöÒæ£¬Í¬Ê±Ò²ÊÇÏßÐÔ¶ÎÔöÒæ£¬µ¥Î»£ºdB */
-	param->max_peak = -1.0;			/* ¾­AGC´¦Àíºó£¬Êä³öÓïÒôµÄ×î´óÄÜÁ¿£¬·¶Î§£ºµ¥Î»£ºdB */
-	param->fRk0 = 2;				/* À©ÕÅ¶ÎÐ±ÂÊ */
-	param->fRth2 = -35;				/* Ñ¹Ëõ¶ÎÆðÊ¼ÄÜÁ¿dBãÐÖµ£¬Í¬Ê±Ò²ÊÇÏßÐÔ¶Î½áÊøãÐÖµ£¬ÔöÒæÖð½¥½µµÍ£¬×¢Òâ fRth2 + max_gain < max_peak */
-	param->fRth1 = -80;				/* À©ÕÅ¶Î½áÊøÄÜÁ¿dBãÐÖµ£¬Í¬Ê±Ò²ÊÇÏßÐÔ¶Î¿ªÊ¼ãÐÖµ£¬ÄÜÁ¿¸ßÓÚ¸ÄÇøÓòÒÔmax_gainÔöÒæ */
-	param->fRth0 = -85;				/* ÔëÉùÃÅãÐÖµ */
+	/* æ–°ç‰ˆAGCå‚æ•° */
+	param->attack_time = 200.0;		/* è§¦å‘æ—¶é—´ï¼Œå³AGCå¢žç›Šä¸Šå‡æ‰€éœ€è¦çš„æ—¶é—´ */
+	param->release_time = 200.0;	/* æ–½æ”¾æ—¶é—´ï¼Œå³AGCå¢žç›Šä¸‹é™æ‰€éœ€è¦çš„æ—¶é—´ */
+	//param->max_gain = 35.0;		/* æœ€å¤§å¢žç›Šï¼ŒåŒæ—¶ä¹Ÿæ˜¯çº¿æ€§æ®µå¢žç›Šï¼Œå•ä½ï¼šdB */
+	param->max_gain = 30;			/* æœ€å¤§å¢žç›Šï¼ŒåŒæ—¶ä¹Ÿæ˜¯çº¿æ€§æ®µå¢žç›Šï¼Œå•ä½ï¼šdB */
+	param->max_peak = -1.0;			/* ç»AGCå¤„ç†åŽï¼Œè¾“å‡ºè¯­éŸ³çš„æœ€å¤§èƒ½é‡ï¼ŒèŒƒå›´ï¼šå•ä½ï¼šdB */
+	param->fRk0 = 2;				/* æ‰©å¼ æ®µæ–œçŽ‡ */
+	param->fRth2 = -35;				/* åŽ‹ç¼©æ®µèµ·å§‹èƒ½é‡dBé˜ˆå€¼ï¼ŒåŒæ—¶ä¹Ÿæ˜¯çº¿æ€§æ®µç»“æŸé˜ˆå€¼ï¼Œå¢žç›Šé€æ¸é™ä½Žï¼Œæ³¨æ„ fRth2 + max_gain < max_peak */
+	param->fRth1 = -80;				/* æ‰©å¼ æ®µç»“æŸèƒ½é‡dBé˜ˆå€¼ï¼ŒåŒæ—¶ä¹Ÿæ˜¯çº¿æ€§æ®µå¼€å§‹é˜ˆå€¼ï¼Œèƒ½é‡é«˜äºŽæ”¹åŒºåŸŸä»¥max_gainå¢žç›Š */
+	param->fRth0 = -85;				/* å™ªå£°é—¨é˜ˆå€¼ */
 
-	/* ÎÞÐ§²ÎÊý */
-	param->fs = 16000;                       /* Êý¾Ý²ÉÑùÂÊ */
-	param->frmlen = 256;                   /* ´¦ÀíÖ¡³¤ */
-	param->attenuate_time = 1000; /* ÔëÉùË¥¼õÊ±¼ä£¬¼´ÔëÉù¶ÎÔöÒæË¥¼õµ½1ËùÐèµÄÊ±¼ä */
-	param->fRk1 = 0.8;                      /* À©ÕÅ¶ÎÐ±ÂÊ */
-	param->fRk2 = 0.4;                      /* À©ÕÅ¶ÎÐ±ÂÊ */
-	param->fLineGainDb = -25.0f;               /* µÍÓÚ¸ÃÖµ£¬ÆðÊ¼µÄattenuate_time(ms)ÄÚ²»×öÔöÒæ */
-	param->swSmL0 = 40;                    /* À©ÕÅ¶ÎÊ±ÓòÆ½»¬µãÊý */
-	param->swSmL1 = 80;                    /* ÏßÐÔ¶ÎÊ±ÓòÆ½»¬µãÊý */
-	param->swSmL2 = 80;                    /* Ñ¹Ëõ¶ÎÊ±ÓòÆ½»¬µãÊý */
+	/* æ— æ•ˆå‚æ•° */
+	param->fs = 16000;                       /* æ•°æ®é‡‡æ ·çŽ‡ */
+	param->frmlen = 256;                   /* å¤„ç†å¸§é•¿ */
+	param->attenuate_time = 1000; /* å™ªå£°è¡°å‡æ—¶é—´ï¼Œå³å™ªå£°æ®µå¢žç›Šè¡°å‡åˆ°1æ‰€éœ€çš„æ—¶é—´ */
+	param->fRk1 = 0.8;                      /* æ‰©å¼ æ®µæ–œçŽ‡ */
+	param->fRk2 = 0.4;                      /* æ‰©å¼ æ®µæ–œçŽ‡ */
+	param->fLineGainDb = -25.0f;               /* ä½ŽäºŽè¯¥å€¼ï¼Œèµ·å§‹çš„attenuate_time(ms)å†…ä¸åšå¢žç›Š */
+	param->swSmL0 = 40;                    /* æ‰©å¼ æ®µæ—¶åŸŸå¹³æ»‘ç‚¹æ•° */
+	param->swSmL1 = 80;                    /* çº¿æ€§æ®µæ—¶åŸŸå¹³æ»‘ç‚¹æ•° */
+	param->swSmL2 = 80;                    /* åŽ‹ç¼©æ®µæ—¶åŸŸå¹³æ»‘ç‚¹æ•° */
 
 	return (void*)param;
 }
@@ -270,10 +270,10 @@ inline static void* rkaudio_cng_param_init()
 {
 	RKCNGParam* param = (RKCNGParam*)malloc(sizeof(RKCNGParam));
 	/* cng paremeters */
-	param->fSmoothAlpha = 0.99f;										            /* INT16 Q15 Ê©¼ÓÊæÊÊÔëÉùÆ½»¬¶È */
-	param->fSpeechGain = 0;										                /* INT16 Q15 Ê©¼ÓÊæÊÊÔëÉùÓïÒôÎÆÀíÄ£Äâ³Ì¶È */
-	param->fGain = 20.0;                                           /* INT16 Q0 Ê©¼ÓÊæÊÊÔëÉù·ù¶È±ÈÀý */
-	param->fMpy = 20;                                            /* INT16 Q0 °×ÔëËæ»úÊýÉú³É·ù¶È */
+	param->fSmoothAlpha = 0.99f;										            /* INT16 Q15 æ–½åŠ èˆ’é€‚å™ªå£°å¹³æ»‘åº¦ */
+	param->fSpeechGain = 0;										                /* INT16 Q15 æ–½åŠ èˆ’é€‚å™ªå£°è¯­éŸ³çº¹ç†æ¨¡æ‹Ÿç¨‹åº¦ */
+	param->fGain = 20.0;                                           /* INT16 Q0 æ–½åŠ èˆ’é€‚å™ªå£°å¹…åº¦æ¯”ä¾‹ */
+	param->fMpy = 20;                                            /* INT16 Q0 ç™½å™ªéšæœºæ•°ç”Ÿæˆå¹…åº¦ */
 	return (void*)param;
 }
 /* Set the Sub-Para which used to initialize the DTD*/
@@ -281,7 +281,7 @@ inline static void* rkaudio_dtd_param_init()
 {
 	RKDTDParam* param = (RKDTDParam*)malloc(sizeof(RKDTDParam));
 	/* dtd paremeters*/
-	param->ksiThd_high = 0.60f;										            /* µ¥Ë«½²ÅÐ¾öãÐÖµ */
+	param->ksiThd_high = 0.60f;										            /* å•åŒè®²åˆ¤å†³é˜ˆå€¼ */
 	param->ksiThd_low = 0.30f;
 	return (void*)param;
 }
