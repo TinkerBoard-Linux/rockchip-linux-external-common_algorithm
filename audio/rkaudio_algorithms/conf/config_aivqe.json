@@ -12,7 +12,7 @@
             "drop_ref_channel" : 0
         },
         "fast_aec": {
-            "status" : "enable"
+            "status" : "disable"
         },
         "aes": {
             "status" : "enable",
