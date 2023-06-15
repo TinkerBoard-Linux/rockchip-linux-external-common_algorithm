@@ -58,7 +58,7 @@
             "status" : "disable",
             "rlsLg"  :4,
             "curveLg" : 10,
-            "delay"  : "2",
+            "delay"  : 2,
             "forgetting"  : "float:0.98",
             "t60" : "float:0.5",
             "coCoeff" : "float:1"
