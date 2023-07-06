@@ -41,6 +41,32 @@ if (USE_UCLIBC)
 				DESTINATION "lib"
 				RENAME libaec_bf_process.a
 			)
+        elseif (RKAPPLUS_WAKEUP_MODE1_NN_ENABLE)
+            install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/../../../../iva/iva/librockiva/rockiva-rv1106-Linux/lib/librknnmrt.so
+                ${CMAKE_CURRENT_SOURCE_DIR}/../../../../iva/iva/librockiva/rockiva-rv1106-Linux/lib/librknnmrt.a
+				DESTINATION "lib"
+            )
+			install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/uclibc/libaec_bf_process_wakeup_mode1_nn.so
+				DESTINATION "lib"
+				RENAME libaec_bf_process.so
+			)
+			install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/uclibc/libaec_bf_process_wakeup_mode1_nn.a
+				DESTINATION "lib"
+				RENAME libaec_bf_process.a
+            )
+        elseif (RKAPPLUS_WAKEUP_MODE2_NN_ENABLE)
+            install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/../../../../iva/iva/librockiva/rockiva-rv1106-Linux/lib/librknnmrt.so
+                ${CMAKE_CURRENT_SOURCE_DIR}/../../../../iva/iva/librockiva/rockiva-rv1106-Linux/lib/librknnmrt.a
+				DESTINATION "lib"
+			)
+			install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/uclibc/libaec_bf_process_wakeup_mode2_nn.so
+				DESTINATION "lib"
+				RENAME libaec_bf_process.so
+			)
+			install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/uclibc/libaec_bf_process_wakeup_mode2_nn.a
+				DESTINATION "lib"
+				RENAME libaec_bf_process.a
+            )
 		else()
 			install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/uclibc/libaec_bf_process.so
 				${CMAKE_CURRENT_SOURCE_DIR}/uclibc/libaec_bf_process.a
