@@ -22,7 +22,7 @@ typedef struct StDemuxerInput{
     int8_t   s8VideoEnableFlag;
     int8_t   s8AudioEnableFlag;
     const char *transport;
-    int rtsp_io_timeout;
+    int network_io_timeout;
 } DemuxerInput;
 
 typedef struct StDemuxerParam{
