@@ -1,7 +1,7 @@
 {
   "skv_ao_configs": {
     "anr": {
-      "status" : "enable",
+      "status" : "disable",
       "noiseFactor": "float:0.99",
       "swU": 10,
       "psiMin": "float:0.05",
@@ -31,14 +31,14 @@
     },
     "agc": {
       "status" : "enable",
-      "attack_time"  : "float:200.0",
+      "attack_time"  : "float:400.0",
       "release_time" : "float:200.0",
       "attenuate_time" : "float:1000",
-      "max_gain": "float:5.0",
+      "max_gain": "float:30.0",
       "max_peak": "float:-1.0",
-      "fRth0": "float:-45",
-      "fRth1": "float:-35",
-      "fRth2": "float:-25",
+      "fRth0": "float:-65.0",
+      "fRth1": "float:-60.0",
+      "fRth2": "float:-35.0",
       "fRk0" : "float:2.0",
       "fRk1" : "float:0.8",
       "fRk2" : "float:0.4",
@@ -47,8 +47,16 @@
       "swSmL1" : 80,
       "swSmL2" : 80
     },
+    "filter": {
+      "status" : "disable",
+      "type" : 2,
+      "mode" : 0,
+      "fc" : "float:600.0",
+      "bw" : "float:2.0",
+      "post_gain" : "float:0.0"
+    },
     "howl": {
-      "status" : "enable",
+      "status" : "disable",
       "mode" : 2
     }
   }
