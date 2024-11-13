@@ -15,6 +15,7 @@ int file_cache_open(const char *filename, int flags, ...);
 int file_cache_close(int fd);
 int file_cache_fstat(int fd, struct stat *filestat);
 void file_cache_set_mode(FILE_WRITE_MODE write_mode);
+int file_cache_process_exit(char *filename);
 
 #if 0
 FILE *file_cache_fopen(const char *file_name, const char *mode);
